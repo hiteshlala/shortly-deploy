@@ -80,11 +80,13 @@ module.exports = function(grunt) {
         command: [
           'git add .',
           'git commit -m "Updating server..."',
-          'git push live master',
-          'password5'
+          'git push live master'
         ].join('&&')
       }
-      
+
+
+
+
     },
   });
 
