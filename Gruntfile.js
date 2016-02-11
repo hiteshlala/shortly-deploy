@@ -77,6 +77,11 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command: [
+        'git add .',
+        'git commit -m "Updating server..."',
+        'git push live master',
+      ].join('&&')
       }
     },
   });
@@ -130,6 +135,10 @@ module.exports = function(grunt) {
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
       // add your production server task here
+
+
+
+
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
@@ -141,7 +150,7 @@ module.exports = function(grunt) {
 
   ]);
 
-  grunt.registerTask('default', ['eslint']);
+  grunt.registerTask('default', ['shell:prodServer']);
 
 
 };
