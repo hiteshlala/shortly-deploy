@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         separator: ';',
       },
       dist: {
-        src: ['app/**/*.js', 'db/**/*.js', 'lib/**/*.js', 'public/**/*.js', 'server-config.js', 'server.js'],
+        src: ['public/client/*.js'],
         dest: 'public/dist/concatfile.js',
       },
     },
@@ -33,18 +33,29 @@ module.exports = function(grunt) {
       },
       build: {
         src: 'public/dist/concatfile.js',
-        dest: 'public/dist/build/<%= pkg.name %>.min.js'
+        dest: 'public/dist/concatfile.min.js'
       }
     },
 
     eslint: {
       target: [
         // Add list of files to lint here
-        'public/dist/build/<%= pkg.name %>.min.js'
+        'public/dist/concatfile.min.js'
+        // 'public/client/*.js',
+        // 'public/lib/*.js'
       ]
     },
 
     cssmin: {
+      options: {
+        shorthandCompacting: true,
+        roundingPercision: -1
+      },
+      target: {
+        files: {
+          'public/dist/style.min.css' : ['public/style.css']
+        }
+      }
     },
 
     watch: {
@@ -109,6 +120,11 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'concat',
+    'uglify',
+    'cssmin',
+    'eslint',
+    'mochaTest'
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -121,9 +137,11 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'build'
+
   ]);
 
-  grunt.registerTask('default', ['concat', 'uglify', 'eslint']);
+  grunt.registerTask('default', ['eslint']);
 
 
 };
