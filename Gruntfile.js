@@ -83,11 +83,7 @@ module.exports = function(grunt) {
           'git push live master'
         ].join('&&')
       }
-
-
-
-
-    },
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
