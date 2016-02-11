@@ -81,12 +81,12 @@ module.exports = function(grunt) {
           'git add .',
           'git commit -m "Updating server..."',
           'git push live master',
-        ].join('&&')
+        ].join(' && ')
       }
     },
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify')
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
